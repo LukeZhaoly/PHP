@@ -1,0 +1,16 @@
+body,p,html,head,div{
+    margin: 0;
+    padding: 0;
+}
+
+input{
+    margin: 0 auto;
+}
+.text-c{
+    text-align: center;
+}
+
+.warn-color{
+    color: red;
+    font-family: "Microsoft YaHei UI";
+}

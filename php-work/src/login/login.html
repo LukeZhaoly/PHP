@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnlogin").click(
+                function () {
+                    userlogin();
+                }
+            )
+        });
+       function userlogin() {
+           var username=$("#name").val();
+           var pwd=$("#password").val();
+           if(username!=""&&pwd!=""){
+               $.ajax({
+                   url:"login.php",
+                   type:"POST",
+                   data:{"username":username,"password":pwd},
+                   dataType:"json",
+                   success:function (res) {
+                       if (res.flag=="y"){
+                           console.log(res);
+                           location.href="welcome.html";
+                       }else {
+                           alert("用户名或密码错误")
+                       }
+                   },
+                   error:function () {
+                        alert("用户名或密码错误");
+                   }
+               });
+           }
+       }
+    </script>
+</head>
+<body>
+
+        name：<input type="text" name="name" placeholder="请输入用户名" id="name"><br><br>
+        password: <input type="text" name="password" placeholder="请输入密码" id="password"><br><br>
+        <input type="button" value="登录" id="btnlogin">
+        <a href="">忘记密码？</a>
+
+</body>
+</html>

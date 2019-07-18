@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link type="text/css" href="../css/common.css" rel="stylesheet" >
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        function userRegist() {
+            //获取输入的值
+            var name=$("#name").val();
+            var pwd=$("#pwd").val();
+            var repwd=$("#repwd").val();
+            var phone=$("#phone").val();
+            var email=$("#email").val();
+            var nickname=$("#nickname").val();
+            var comment=$("#comment").val();
+            var nameErr="",pwdErr ="",repwdErr = "",emailErr ="", phoneErr ="", nicknameErr = "";
+            //判断其是否为空，必填选项
+            if(name==""){
+                nameErr="用户名不能为空";
+            }
+            if (pwd=="") {
+                pwdErr="密码不能为空";
+            }
+            if (repwd=="") {
+                repwdErr="确认密码不能为空";
+            }
+            if (repwd!=pwd){
+                repwdErr="两次密码输入不一致"
+            }
+            if (phone=="") {
+                phoneErr="手机号不能为空";
+            }
+            if (email=="") {
+                emailErr="邮箱不能为空";
+            }
+            if (nickname=="") {
+                nicknameErr="昵称不能为空";
+            }
+
+            //使用ajax传值
+            $.ajax({
+                url:"regist.php",
+                type:"POST",
+                data:{
+                    "name":name,
+                    "pwd":pwd,
+                    "phone":phone,
+                    "email":email,
+                    "nickname":nickname,
+                    "comment":comment
+                },
+                dataType:"json",
+                success:function (res) {
+                    if(res.flag=="y")
+                        location.href="../login/login.html";
+
+
+                }
+
+
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="text-c">
+    名字: <input type="text" name="name" value="" id="name" >
+    <span class="warn-color">* </span>
+    <br><br>
+    密码: <input type="text" name="pwd" value="" id="pwd">
+    <span class="warn-color">* </span>
+    <br><br>
+    确认密码: <input type="text" name="repwd" value="" id="repwd">
+    <span class="warn-color">* </span>
+    <br><br>
+    手机号: <input type="text" name="phone" value="" id="phone">
+    <span class="warn-color">* </span>
+    <br><br>
+    邮箱: <input type="text" name="email" value="" id="email">
+    <span class="warn-color">* </span>
+    <br><br>
+    昵称: <input type="text" name="nickname" value="" id="nickname">
+    <span class="warn-color">* </span>
+    <br><br>
+    备注: <textarea name="comment" rows="5" cols="40" id="comment"></textarea>
+    <br><br>
+
+    <input type="button" name="submit" value="注册" onclick="userRegist()">
+
+</div>
+</body>
+</html>
