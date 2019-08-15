@@ -12,6 +12,24 @@
 </head>
 <body>
 {{--顶部bar--}}
-<nav class="navbar navbar-laravel"></nav>
+{{-- Navigation Bar --}}
+<nav class="navbar navbar-static-top navbar-default">
+    <div class="container">
+
+        <a class="navbar-brand " href="#">{{ config('blog.title') }} 后台</a>
+        <button class="navbar-toggle collapse" type="button" data-toggle="collapse" data-target="#navbar-menu">
+
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            @include('admin.partials.navbar')
+        </div>
+    </div>
+</nav>
+
+<main class="py-4">
+    @yield('content')
+</main>
+<script src="{{ asset('js/app.js') }}"></script>
+@yield('scripts')
 </body>
 </html>
