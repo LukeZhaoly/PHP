@@ -19,7 +19,7 @@
                         @include('admin.partials.errors')
 
                         <form role="form" method="POST" action="/admin/tag">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            {{csrf_field()}}
 
                             <div class="form-group row">
                                 <label for="tag" class="col-md-3 col-form-label">标签</label>
