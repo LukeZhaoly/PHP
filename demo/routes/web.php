@@ -30,6 +30,14 @@ Route::middleware('auth')->namespace('Admin')->group(function (){
     Route::resource('admin/post','PostController');
     Route::resource('admin/tag','TagController');
     Route::get('admin/upload','UploadController@index');
+
+    //增加删除文件
+    Route::post("admin/upload/file","UploadController@uploadfile");
+    Route::delete("admin/upload/file","UploadController@deletefile");
+
+    //增加删除文件夹
+    Route::post("admin/upload/folder","UploadController@createfolder");
+    Route::delete("admin/upload/folder","UploadController@deletefolder");
 });
 
 //登录退出

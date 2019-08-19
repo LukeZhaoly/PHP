@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{config('blog.title')}} 后台管理</title>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('css/datatables.min.css')}}" rel="stylesheet">
     @yield('styles')
 </head>
 <body>
@@ -30,6 +31,7 @@
     @yield('content')
 </main>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{asset('js/datatables.min.js')}}"></script>
 @yield('scripts')
 </body>
 </html>

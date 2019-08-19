@@ -8,10 +8,10 @@ window._ = require('lodash');
  */
 
 try {
-    window.$ = window.jQuery = require('../datatables/media/js/jquery');
+    window.Popper = require('popper.js').default;
+    window.$ = window.jQuery = require('jquery');
+    require('datatables.net-bs4');
     require('bootstrap');
-    require('../datatables');
-    require('bootstrap-sass');
 } catch (e) {}
 
 /**
