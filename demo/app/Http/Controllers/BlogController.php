@@ -3,23 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Carbon\Carbon;
+use App\Models\Tag;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    //访问主页
-    public function index(){
-        //从数据库中查找数据，根据config的设置每页的分页数
-        $posts=Post::where("published_at","<=",Carbon::now())
-            ->orderBy('published_at','desc')
-            ->paginate(config('blog.posts_per_page'));
-        return view("blog.index")->with('posts',$posts);
+    public function index(Request $request)
+    {
+        $tag = $request->get('tag');
+        $postService = new PostService($tag);
+        $data = $postService->lists();
+        $layout = $tag ? Tag::layout($tag) : 'blog.layouts.index';
+        return view($layout, $data);
     }
 
-    //访问具体的文章
-    public function showPost($slug){
-        $post=Post::where('slug',$slug)->firstOrFail();
-        return view('blog.post')->with('post',$post);
+    public function showPost($slug, Request $request)
+    {
+        $post = Post::with('tags')->where('slug', $slug)->firstOrFail();
+        $tag = $request->get('tag');
+        if ($tag) {
+            $tag = Tag::where('tag', $tag)->firstOrFail();
+        }
+        return view($post->layout, compact('post', 'tag'));
     }
 }

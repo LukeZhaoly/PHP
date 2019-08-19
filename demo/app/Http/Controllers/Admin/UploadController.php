@@ -60,7 +60,6 @@ class UploadController extends Controller
         $path = $request->get('folder') . '/' . $del_file;
 
         $result = $this->manager->deleteFile($path);
-
         if ($result === true) {
             return redirect()
                 ->back()

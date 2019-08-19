@@ -27,8 +27,8 @@ Route::get('/blog/{slug}',"BlogController@showPost")->name("blog.detail");
  * 创建后台路由
  */
 Route::middleware('auth')->namespace('Admin')->group(function (){
-    Route::resource('admin/post','PostController');
-    Route::resource('admin/tag','TagController');
+    Route::resource('admin/post','PostController',['except'=>'show']);
+    Route::resource('admin/tag','TagController',['except'=>'show']);
     Route::get('admin/upload','UploadController@index');
 
     //增加删除文件
